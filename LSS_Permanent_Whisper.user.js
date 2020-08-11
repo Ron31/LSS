@@ -3,17 +3,17 @@
 // @version      0.1
 // @description  Enables to whisper permanent in alliance chat.
 // @author       Crazycake
-// @match        https://leitstellenspiel.de
+// @include      /^https?:\/\/(?:w{3}\.)?(?:operacni-stredisko\.cz|alarmcentral-spil\.dk|leitstellenspiel\.de|missionchief\.gr|(?:missionchief-australia|missionchief|hatakeskuspeli|missionchief-japan|missionchief-korea|nodsentralspillet|meldkamerspel|operador193|jogo-operador112|jocdispecerat112|dispecerske-centrum|112-merkez|dyspetcher101-game)\.com|missionchief\.co\.uk|centro-de-mando\.es|centro-de-mando\.mx|operateur112\.fr|operatore112\.it|operatorratunkowy\.pl|dispetcher112\.ru|larmcentralen-spelet\.se)\/?$/
 // @grant        none
-// @run-at document-end
+
 // ==/UserScript==
 
 (function() {
-    'use strict';
-
-    document.getElementById('chat_panel_heading-id').innerHTML = '<button type="button"><img src="https://img.icons8.com/ios-filled/50/000000/whispering.png"/></button>';
+    'use strict';    
+    
+    var chathead = document.getElementById("chat_panel_heading");
+    chathead.insertAdjacentHTML('beforeend','<input type="checkbox" id="Whisper"> Dauerhaftes Flüstern');
     
 
-    //var chatwindow = document.getElementbyId("alliance_chat_message");
-    //chatwindow.value("/w");
+
 })();
