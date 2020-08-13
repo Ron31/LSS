@@ -18,13 +18,20 @@
     {
         var checkbox = document.getElementById("Whisper");
 
-        if(checkbox.checked ==true)
+        while(checkbox.checked == true)
         {
-            document.getElementById("alliance_chat_message").value = "/w";
-        }
-        else
-        {
-            document.getElementById("alliance_chat_message").value = "";
+            var chatinhalt = document.getElementById("alliance_chat_message").value;
+            console.log(chatinhalt);
+
+            if(!chatinhalt.includes("/w"))
+            {
+                var w = "/w ";
+                var chatinhalt_old = chatinhalt;
+                chatinhalt = w.concat(chatinhalt_old);
+                console.log(chatinhalt);
+                document.getElementById("alliance_chat_message").value = chatinhalt;
+            }
+            sleep(1000);
         }
     }
     var Listener = document.querySelector("#Whisper");
@@ -32,5 +39,13 @@
     {
         Listener.addEventListener("click",ToggleWhisper, false);
     } 
+    function sleep(ms)
+{
+    var d = new Date();
+    var d2 = null;
+    do { d2 = new Date(); }
+    while(d2-d < ms);
+}
+
     
     })();
