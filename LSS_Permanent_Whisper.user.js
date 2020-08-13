@@ -12,7 +12,7 @@
     'use strict';
 
     var chathead = document.getElementById("chat_panel_heading");
-    chathead.insertAdjacentHTML('beforeend','<input type="checkbox" id="Whisper"><img src="https://img.icons8.com/ios/15/000000/whisper.png"/>');
+    chathead.insertAdjacentHTML('beforebegin','<div id="WhisperDiv" class="pull-right" style="padding-top:2%"> Permanent whisper: <input type="checkbox" id="Whisper"></div>');
 
     function ToggleWhisper()
     {
