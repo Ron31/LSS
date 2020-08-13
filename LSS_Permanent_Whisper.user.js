@@ -17,35 +17,34 @@
     function ToggleWhisper()
     {
         var checkbox = document.getElementById("Whisper");
-
-        while(checkbox.checked == true)
+        var chatinhalt = document.getElementById("alliance_chat_message").value;
+        
+        if(checkbox.checked == true)
         {
-            var chatinhalt = document.getElementById("alliance_chat_message").value;
-            console.log(chatinhalt);
-
             if(!chatinhalt.includes("/w"))
             {
                 var w = "/w ";
                 var chatinhalt_old = chatinhalt;
                 chatinhalt = w.concat(chatinhalt_old);
-                console.log(chatinhalt);
                 document.getElementById("alliance_chat_message").value = chatinhalt;
             }
-            sleep(1000);
+        }
+        else
+        {
+            console.log
+            document.getElementById("alliance_chat_message").value = chatinhalt.replace("/w ","");
+            
         }
     }
-    var Listener = document.querySelector("#Whisper");
-    if(Listener)
-    {
-        Listener.addEventListener("click",ToggleWhisper, false);
-    } 
-    function sleep(ms)
-{
-    var d = new Date();
-    var d2 = null;
-    do { d2 = new Date(); }
-    while(d2-d < ms);
-}
-
     
-    })();
+    var ToggleListener = document.querySelector("#Whisper");
+    if(ToggleListener)
+    {
+        ToggleListener.addEventListener("click",ToggleWhisper);
+    }
+    var ReloadListener = document.querySelector("#alliance_chat_message");
+    if(ReloadListener)
+    {
+        ReloadListener.addEventListener("submit", ToggleWhisper);
+    }
+})();
