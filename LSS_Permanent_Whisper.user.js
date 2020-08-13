@@ -12,7 +12,7 @@
     'use strict';
 
     var chathead = document.getElementById("chat_panel_heading");
-    chathead.insertAdjacentHTML('beforeend','<input type="checkbox" id="Whisper" onclick="ToggleWhisper()" /><img src="https://img.icons8.com/ios/15/000000/whisper.png"/>');
+    chathead.insertAdjacentHTML('beforeend','<input type="checkbox" id="Whisper"><img src="https://img.icons8.com/ios/15/000000/whisper.png"/>');
 
     function ToggleWhisper()
     {
@@ -20,12 +20,17 @@
 
         if(checkbox.checked ==true)
         {
-            console.log("checked");
+            document.getElementById("alliance_chat_message").value = "/w";
         }
         else
         {
-            console.log("unchecked");
+            document.getElementById("alliance_chat_message").value = "";
         }
     }
+    var Listener = document.querySelector("#Whisper");
+    if(Listener)
+    {
+        Listener.addEventListener("click",ToggleWhisper, false);
+    } 
     
     })();
