@@ -5,22 +5,19 @@
 // @author      Crazycake
 // @include     /^https?:\/\/(?:w{3}\.)?(?:operacni-stredisko\.cz|alarmcentral-spil\.dk|leitstellenspiel\.de|missionchief\.gr|(?:missionchief-australia|missionchief|hatakeskuspeli|missionchief-japan|missionchief-korea|nodsentralspillet|meldkamerspel|operador193|jogo-operador112|jocdispecerat112|dispecerske-centrum|112-merkez|dyspetcher101-game)\.com|missionchief\.co\.uk|centro-de-mando\.es|centro-de-mando\.mx|operateur112\.fr|operatore112\.it|operatorratunkowy\.pl|dispetcher112\.ru|larmcentralen-spelet\.se)\/?$/
 // @grant       none
-// @require     https://cdn.jsdelivr.net/npm/awesomplete@1.1.5/awesomplete.js
-// @resource    https://cdn.jsdelivr.net/npm/awesomplete@1.1.5/awesomplete.css
-// @grant       GM_addStyle
-// @grant       GM_getResourceText
-
 // ==/UserScript==
 
 (function() {
     'use strict';
 
     var chathead = document.getElementById("chat_panel_heading");
-    chathead.insertAdjacentHTML('beforebegin','<div id="WhisperDiv" class="pull-right" style="padding-top:2%;padding-right:2%;padding-left:1%"> Permanent whisper to <input id="WhisperUserSelect"> <input type="checkbox" id="Whisper"></div>');
+    chathead.insertAdjacentHTML('beforebegin',
+    '<div id="WhisperDiv" class="pull-right" style="padding-top:2%;padding-right:2%;padding-left:1%"> Permanent whisper to <input id="whisperUser" list="whisperUserList"><datalist id="whisperUserList"></datalist> <input type="checkbox" id="Whisper"></div>');
 
 
     var allianceinfo = {};
     var AllianceUsersDatalistArray = [];
+    var whisperUserList = document.getElementById("whisperUserList");
     $.getJSON('/api/allianceinfo', function(data){
     allianceinfo = data;
     var allianceUsers = [];
@@ -28,11 +25,11 @@
     {
         allianceUsers.push(allianceinfo.users[i].name);
     }
-    var whisperUserSelect = document.getElementById("WhisperUserSelect");
-    var awesomplete = new Awesomplete (whisperUserSelect)
-    awesomplete.list = allianceUsers;
-
-               
+    allianceUsers.forEach(function(item){
+        var option = document.createElement('option');
+        option.value = item;
+        whisperUserList.appendChild(option);
+    })
     });
 
 
