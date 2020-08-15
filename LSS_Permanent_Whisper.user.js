@@ -12,13 +12,26 @@
     'use strict';
 
     var chathead = document.getElementById("chat_panel_heading");
-    chathead.insertAdjacentHTML('beforebegin','<div id="WhisperDiv" class="pull-right" style="padding-top:2%"> Permanent whisper: <input type="checkbox" id="Whisper"></div>');
+    chathead.insertAdjacentHTML('beforebegin','<div id="WhisperDiv" class="pull-right" style="padding-top:2%;padding-right:2%;padding-left:1%"> Permanent whisper <input type="checkbox" id="Whisper"></div>');
+
+
+    var allianceinfo = {};
+    $.getJSON('/api/allianceinfo', function(data){
+    allianceinfo = data;
+    var allianceUsers = [];
+    for(var i = 0; i < allianceinfo.users.length ; i++)
+    {
+        allianceUsers.push(allianceinfo.users[i].name);
+    }
+               
+    });
+
 
     function ToggleWhisper()
     {
         var checkbox = document.getElementById("Whisper");
         var chatinhalt = document.getElementById("alliance_chat_message").value;
-        
+
         if(checkbox.checked == true)
         {
             if(!chatinhalt.includes("/w"))
@@ -31,12 +44,10 @@
         }
         else
         {
-            console.log
             document.getElementById("alliance_chat_message").value = chatinhalt.replace("/w ","");
-            
         }
     }
-    
+
     var ToggleListener = document.querySelector("#Whisper");
     if(ToggleListener)
     {
