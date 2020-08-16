@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name        LSS Chat permanent whisper
-// @version     1.3
+// @version     1.4
 // @description Enables permanent whisper in alliance chat.
 // @author      Crazycake
 // @include     /^https?:\/\/(?:w{3}\.)?(?:operacni-stredisko\.cz|alarmcentral-spil\.dk|leitstellenspiel\.de|missionchief\.gr|(?:missionchief-australia|missionchief|hatakeskuspeli|missionchief-japan|missionchief-korea|nodsentralspillet|meldkamerspel|operador193|jogo-operador112|jocdispecerat112|dispecerske-centrum|112-merkez|dyspetcher101-game)\.com|missionchief\.co\.uk|centro-de-mando\.es|centro-de-mando\.mx|operateur112\.fr|operatore112\.it|operatorratunkowy\.pl|dispetcher112\.ru|larmcentralen-spelet\.se)\/?$/
 // @grant       none
+// @updateURL   https://github.com/Cr4zyc4k3/LSS/raw/master/LSS_Permanent_Whisper.user.js
 // ==/UserScript==
 
 (function() {
@@ -12,8 +13,8 @@
 
     var chathead = document.getElementById("chat_panel_heading");
     chathead.insertAdjacentHTML('beforebegin',
-    '<div id="WhisperDiv" class="pull-right" style="padding-top:2%;padding-right:2%;padding-left:1%"> Permanent whisper to <input id="whisperUser" list="whisperUserList"><datalist id="whisperUserList"></datalist> <input type="checkbox" id="Whisper"></div>');
-
+    '<div id="WhisperDiv" class="pull-right panel-heading"> Permanent whisper to <input id="whisperUser" list="whisperUserList"><datalist id="whisperUserList"></datalist> <input type="checkbox" id="Whisper"></div>');
+   
 
     var allianceinfo = {};
     var AllianceUsersDatalistArray = [];
@@ -43,7 +44,7 @@
         {
             if(!chatinhalt.includes("/w"))
             {
-                var w = "/w " + whisperUser;
+                var w = "/w " + whisperUser + " ";
                 var chatinhalt_old = chatinhalt;
                 chatinhalt = w.concat(chatinhalt_old);
                 document.getElementById("alliance_chat_message").value = chatinhalt;
@@ -51,7 +52,7 @@
         }
         else
         {
-            document.getElementById("alliance_chat_message").value = chatinhalt.replace("/w ","").replace(whisperUser, "");
+            document.getElementById("alliance_chat_message").value = chatinhalt.replace("/w ","").replace(whisperUser + " ", "");
         }
     }
 
