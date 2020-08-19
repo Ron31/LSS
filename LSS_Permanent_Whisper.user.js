@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        LSS Chat permanent whisper
-// @version     1.4
+// @version     1.4.1
 // @description Enables permanent whisper in alliance chat.
 // @author      Crazycake
 // @include     /^https?:\/\/(?:w{3}\.)?(?:operacni-stredisko\.cz|alarmcentral-spil\.dk|leitstellenspiel\.de|missionchief\.gr|(?:missionchief-australia|missionchief|hatakeskuspeli|missionchief-japan|missionchief-korea|nodsentralspillet|meldkamerspel|operador193|jogo-operador112|jocdispecerat112|dispecerske-centrum|112-merkez|dyspetcher101-game)\.com|missionchief\.co\.uk|centro-de-mando\.es|centro-de-mando\.mx|operateur112\.fr|operatore112\.it|operatorratunkowy\.pl|dispetcher112\.ru|larmcentralen-spelet\.se)\/?$/
@@ -13,7 +13,7 @@
 
     var chathead = document.getElementById("chat_panel_heading");
     chathead.insertAdjacentHTML('beforebegin',
-    '<div id="WhisperDiv" class="pull-right panel-heading"> Permanent whisper to <input id="whisperUser" list="whisperUserList"><datalist id="whisperUserList"></datalist> <input type="checkbox" id="Whisper"></div>');
+    '<div id="WhisperDiv" class="pull-right panel-heading"> Permanent whisper to <input id="whisperUser" list="whisperUserList" style="color:black"><datalist id="whisperUserList"></datalist> <input type="checkbox" id="Whisper"></div>');
    
 
     var allianceinfo = {};
