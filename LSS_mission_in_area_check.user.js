@@ -18,7 +18,7 @@
 
 
     var url = window.location.pathname;
-    while (window.top == window.self && !useOwnCoordinates) {
+    if (window.top == window.self && !useOwnCoordinates) {
         var configBtn = '<button type="button" id="stateBtn" style="backgroundcolor:white;color:black dispaly:none" class="leaflet-bar leaflet-control leaflet-control-custom" data-toggle="collapse" title="Bundeslandauswahl"><span class="glyphicon glyphicon-cog"></span></button><div id="stateInput" class="leaflet-bar leaflet-control leaflet-control-custom" style="display:none; background:white; position: relative; role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><label for="stateSelect">Bundeslandauswahl: </label><br><input id="stateSelect" list="stateList"><datalist id="stateList"></datalist></input></div></div>';
         var mapDownLeft = document.getElementsByClassName("leaflet-bottom leaflet-left");
         var mapDownLeftArr = [...mapDownLeft];
@@ -79,7 +79,7 @@
 
 
     }
-    while (url.includes("mission")) {
+    if (url.includes("mission")) {
         console.log("Here we go");
         console.log(borderCoordinates);
         var missionId = url.split("/")[2];
