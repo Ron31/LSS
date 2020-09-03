@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        LSS Mission in area check
-// @version     1.0.0
+// @version     1.0.1
 // @description Checks whether a mission is inside a polygon.
 // @author      Crazycake
 // @include     /https:\/\/www.leitstellenspiel.de/missions/\d+/
@@ -44,6 +44,12 @@
         var shareBtn = document.getElementById("mission_alliance_share_btn");
         shareBtn.classList.add("btn-warning");
         shareBtn.classList.remove("btn-success")
+        var shareAllianceBtn = document.querySelector("alert_notify_alliance");
+        if(shareAllianceBtn){
+            alert("hasdhkjsdjf");
+            shareAllianceBtn.classList.add("btn-warning");
+            shareAllianceBtn.classList.remove("btn-success")
+        }
         var shareAlarmForwardBtn = document.getElementsByClassName("alert_next_alliance");
         for(var i = 0; i < shareAlarmForwardBtn.length; i++){
             shareAlarmForwardBtn[i].classList.add("btn-warning");
@@ -51,8 +57,4 @@
 
         }
     }
-
-
-
-
 })();
