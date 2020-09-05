@@ -6,7 +6,7 @@
 // @include     /https:\/\/www.leitstellenspiel.de/
 // @include     /https:\/\/www.leitstellenspiel.de/missions/\d+/
 // @grant       none
-// @run-at document-end
+// @update-URL  https://github.com/Cr4zyc4k3/LSS/raw/master/LSS_mission_in_area_check.user.js
 // ==/UserScript==
 
 (function () {
@@ -111,7 +111,6 @@
                 shareAllianceBtn[j].classList.add("btn-warning");
                 shareAllianceBtn[j].classList.remove("btn-success");
         }
-        console.log(shareAllianceBtn);
 
         }
 
