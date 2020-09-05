@@ -6,6 +6,7 @@
 // @include     /https:\/\/www.leitstellenspiel.de/
 // @include     /https:\/\/www.leitstellenspiel.de/missions/\d+/
 // @grant       none
+// @run-at document-end
 // ==/UserScript==
 
 (function () {
@@ -105,6 +106,13 @@
                 shareAlarmForwardBtn[i].classList.remove("btn-success");
 
             }
+            var shareAllianceBtn = document.getElementsByClassName("alert_notify_alliance");
+            for(var j = 0; j < shareAllianceBtn.length; j++){
+                shareAllianceBtn[j].classList.add("btn-warning");
+                shareAllianceBtn[j].classList.remove("btn-success");
+        }
+        console.log(shareAllianceBtn);
+
         }
 
     }
@@ -128,6 +136,7 @@
 
         return inside;
     };
+
 
     function getLS() {
     return JSON.parse(localStorage.getItem('LSS_mission_in_area_check'));
