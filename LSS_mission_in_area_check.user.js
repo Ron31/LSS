@@ -5,6 +5,7 @@
 // @author      Crazycake
 // @include     /https:\/\/www.leitstellenspiel.de/missions/\d+/
 // @grant       none
+// @run-at document-end
 // ==/UserScript==
 
 (function () {
@@ -42,19 +43,22 @@
     };
     if(!missionIsInPolygon){
         var shareBtn = document.getElementById("mission_alliance_share_btn");
+        console.log(shareBtn);
         shareBtn.classList.add("btn-warning");
         shareBtn.classList.remove("btn-success")
-        var shareAllianceBtn = document.querySelector("alert_notify_alliance");
-        if(shareAllianceBtn){
-            alert("hasdhkjsdjf");
-            shareAllianceBtn.classList.add("btn-warning");
-            shareAllianceBtn.classList.remove("btn-success")
-        }
         var shareAlarmForwardBtn = document.getElementsByClassName("alert_next_alliance");
+        console.log(shareAlarmForwardBtn);
         for(var i = 0; i < shareAlarmForwardBtn.length; i++){
             shareAlarmForwardBtn[i].classList.add("btn-warning");
             shareAlarmForwardBtn[i].classList.remove("btn-success");
 
+        } 
+        var shareAllianceBtn = document.getElementsByClassName("alert_notify_alliance");
+        console.log(shareAllianceBtn);
+        for(var j = 0; j < shareAllianceBtn.length; j++){
+            shareAllianceBtn[j].classList.add("btn-warning");
+            shareAllianceBtn[j].classList.remove("btn-success")
         }
+        console.log(shareAllianceBtn);
     }
 })();
