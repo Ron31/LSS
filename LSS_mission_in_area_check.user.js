@@ -16,17 +16,16 @@
     var useOwnCoordinates = false;
     var borderCoordinates = [];
 
-    if(borderCoordinates.length > 0)
-    {
+    if (borderCoordinates.length > 0) {
         setLS(borderCoordinates);
     }
-    else if(borderCoordinates.length = 0 && JSON.parse(localStorage.getItem('LSS_mission_in_area_check')) !== 'undefined' && JSON.parse(localStorage.getItem('LSS_mission_in_area_check')) !== null ){
+    else if (borderCoordinates.length = 0 && JSON.parse(localStorage.getItem('LSS_mission_in_area_check')) !== 'undefined' && JSON.parse(localStorage.getItem('LSS_mission_in_area_check')) !== null) {
         borderCoordinates = getLS();
     }
 
     var url = window.location.pathname;
     if (window.top == window.self && !useOwnCoordinates) {
-        var configBtn = '<button type="button" id="stateBtn" style="backgroundcolor:white;color:black dispaly:none" class="leaflet-bar leaflet-control leaflet-control-custom" data-toggle="collapse" title="Bundeslandauswahl"><span class="glyphicon glyphicon-cog"></span></button><div id="stateInput" class="leaflet-bar leaflet-control leaflet-control-custom" style="display:none; background:white; position: relative; role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><label for="stateSelect">Bundeslandauswahl: </label><br><input id="stateSelect" list="stateList"><datalist id="stateList"></datalist></input></div></div>';
+        var configBtn = '<button type="button" id="stateBtn" style="backgroundcolor:white;color:black dispaly:none" class="leaflet-bar leaflet-control leaflet-control-custom" data-toggle="collapse" title="Bundeslandauswahl"><span class="glyphicon glyphicon-cog"></span></button><div id="stateInput" class="leaflet-bar leaflet-control leaflet-control-custom" style="display:none; background:white; position: relative; role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><label for="stateSelect">Bundeslandauswahl: </label><br><select class="form-control" id="stateSelect" multiple></select></div></div>';
         var mapDownLeft = document.getElementsByClassName("leaflet-bottom leaflet-left");
         var mapDownLeftArr = [...mapDownLeft];
         mapDownLeftArr[0].innerHTML = configBtn;
@@ -54,11 +53,12 @@
                 var option = document.createElement('option');
                 option.value = states[i].properties.name;
                 option.innerHTML = states[i].properties.name;
-                document.getElementById("stateList").appendChild(option);
+                document.getElementById("stateSelect").appendChild(option);
             }
             document.getElementById("stateSelect").addEventListener("focusout", function () {
-                document.getElementById("stateSelect").value;
-                switch (document.getElementById("stateSelect").value) {
+                var selectedStates = document.getElementById("stateSelect").value;
+                console.log(selectedStates);
+                switch (selectedStates) {
 
                     case "Baden-Württemberg": window.top.borderCoordinates = states[0].geometry.coordinates[0]; break;
                     case "Bayern": window.top.borderCoordinates = states[1].geometry.coordinates[0]; break;
@@ -91,7 +91,7 @@
         var missionLongitude = missionUrl.getAttribute("data-longitude");
         window.top.borderCoordinates = getLS();
         var missionCoordinates = [missionLongitude, missionLatitude];
-        if(window.top.borderCoordinates == null && !useOwnCoordinates){
+        if (window.top.borderCoordinates == null && !useOwnCoordinates) {
             alert("Keine Grenze angegeben! Alle Einsätze werden außerhalb des Gebiets deklariert!");
             window.top.borderCoordinates = [[0, 0], [0, 0]];
         }
@@ -107,10 +107,10 @@
 
             }
             var shareAllianceBtn = document.getElementsByClassName("alert_notify_alliance");
-            for(var j = 0; j < shareAllianceBtn.length; j++){
+            for (var j = 0; j < shareAllianceBtn.length; j++) {
                 shareAllianceBtn[j].classList.add("btn-warning");
                 shareAllianceBtn[j].classList.remove("btn-success");
-        }
+            }
 
         }
 
@@ -138,7 +138,7 @@
 
 
     function getLS() {
-    return JSON.parse(localStorage.getItem('LSS_mission_in_area_check'));
+        return JSON.parse(localStorage.getItem('LSS_mission_in_area_check'));
     };
 
     function setLS(value) {
