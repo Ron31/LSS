@@ -20,54 +20,53 @@
         '<div id="WhisperDiv" class="pull-right panel-heading"> Permanent whisper to <input id="whisperUser" list="whisperUserList" style="color:black"><datalist id="whisperUserList"></datalist> <input type="checkbox" id="Whisper"></div>');
 
 
-    if(!localStorage.aAllianceinfo || JSON.parse(localStorage.aAllianceinfo).lastUpdate < (new Date().getTime() - 5 * 1000 * 60))
-    {
-        $.getJSON('/api/allianceinfo').done(data => localStorage.setItem('aAllianceinfo', JSON.stringify({lastUpdate: new Date().getTime(), value: data})) );
+    if (!localStorage.aAllianceinfo || JSON.parse(localStorage.aAllianceinfo).lastUpdate < (new Date().getTime() - 5 * 1000 * 60)) {
+        $.getJSON('/api/allianceinfo').done(data => localStorage.setItem('aAllianceinfo', JSON.stringify({ lastUpdate: new Date().getTime(), value: data })));
     }
     var aAllianceinfo = JSON.parse(localStorage.aAllianceinfo).value;
 
-        var allianceinfo = aAllianceinfo;
-        var allianceUsers = [];
-        for (var i = 0; i < allianceinfo.users.length; i++) {
-            if (showOnlyOnlineUsers) {
-                if (allianceinfo.users[i].online) {
-                    allianceUsers.push([allianceinfo.users[i].name, allianceinfo.users[i].roles.toString()]);
-                }
-            }
-            else {
+    var allianceinfo = aAllianceinfo;
+    var allianceUsers = [];
+    for (var i = 0; i < allianceinfo.users.length; i++) {
+        if (showOnlyOnlineUsers) {
+            if (allianceinfo.users[i].online) {
                 allianceUsers.push([allianceinfo.users[i].name, allianceinfo.users[i].roles.toString()]);
             }
         }
-        console.log(allianceUsers);
-        var i = 0;
-        allianceUsers.forEach(function (item) {
-            var option = document.createElement('option');
-            option.value = item[i,0];
-            console.log(option.value);
+        else {
+            allianceUsers.push([allianceinfo.users[i].name, allianceinfo.users[i].roles.toString()]);
+        }
+    }
+    console.log(allianceUsers);
+    var i = 0;
+    allianceUsers.forEach(function (item) {
+        var option = document.createElement('option');
+        option.value = item[i, 0];
+        console.log(option.value);
 
-            if (enableIcons) {
-                if (item[i, 1].includes("Verbands-Admin")) {
-                    option.innerHTML = option.value + ' ♛'
-                }
-                else if (item[i, 1].includes("Verbands-Co-Admin")) {
-                    option.innerHTML = option.value + ' ♚'
-                }
-                else if (item[i, 1].includes("Sprechwunsch-Admin")) {
-                    option.innerHTML = option.value + ' 📣'
-                }
-                else if (item[i, 1].includes("Lehrgangsmeister")) {
-                    option.innerHTML = option.value + ' 🕮'
-                }
-                else if (item[i, 1].includes("Finanzminister")) {
-                    option.innerHTML = option.value + ' 💰'
-                }
-                else if (item[i, 1].includes("Aufsichtsrat")) {
-                    option.innerHTML = option.value + ' 🔍'
-                }
+        if (enableIcons) {
+            if (item[i, 1].includes("Verbands-Admin")) {
+                option.innerHTML = option.value + ' ♛'
             }
-            i++;
-            whisperUserList.appendChild(option);
-        })
+            else if (item[i, 1].includes("Verbands-Co-Admin")) {
+                option.innerHTML = option.value + ' ♚'
+            }
+            else if (item[i, 1].includes("Sprechwunsch-Admin")) {
+                option.innerHTML = option.value + ' 📣'
+            }
+            else if (item[i, 1].includes("Lehrgangsmeister")) {
+                option.innerHTML = option.value + ' 🕮'
+            }
+            else if (item[i, 1].includes("Finanzminister")) {
+                option.innerHTML = option.value + ' 💰'
+            }
+            else if (item[i, 1].includes("Aufsichtsrat")) {
+                option.innerHTML = option.value + ' 🔍'
+            }
+        }
+        i++;
+        whisperUserList.appendChild(option);
+    })
 
 
     function ToggleWhisper() {
