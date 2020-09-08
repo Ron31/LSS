@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        LSS Mission in area check
-// @version     1.1.0
+// @version     1.2.0
 // @description Checks whether a mission is inside a polygon.
 // @author      Crazycake
 // @include     /https:\/\/www.leitstellenspiel.de/
