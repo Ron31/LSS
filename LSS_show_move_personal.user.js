@@ -10,18 +10,18 @@
 (function () {
     'use strict';
 
-    if (!localStorage.aBuildings || JSON.parse(localStorage.aBuildings).lastUpdate < (new Date().getTime() - 5 * 1000 * 60)) {
-        $.getJSON('/api/buildings').done(data => localStorage.setItem('aBuildings', JSON.stringify({ lastUpdate: new Date().getTime(), value: data })));
+    if (!sessionStorage.aBuildings || JSON.parse(sessionStorage.aBuildings).userId !== user_id || JSON.parse(sessionStorage.aBuildings).lastUpdate < (new Date().getTime() - 5 * 1000 * 60)) {
+        $.getJSON('/api/buildings').done(data => sessionStorage.setItem('aBuildings', JSON.stringify({ lastUpdate: new Date().getTime(), value: data, userId: user_id })));
     }
-    var aBuildings = JSON.parse(localStorage.aBuildings).value;
+    const aBuildings = JSON.parse(sessionStorage.aBuildings).value;
 
     let wachen = document.getElementsByClassName("panel-heading personal-select-heading");
 
-    for (var wache of wachen) {
-        var wacheID = wache.getAttribute("building_id");
-        for (var i = 0; i < aBuildings.length; i++) {
+    for (let wache of wachen) {
+        const wacheID = wache.getAttribute("building_id");
+        for (let i = 0; i < aBuildings.length; i++) {
             if (wacheID == aBuildings[i].id){
-            var personal_count = aBuildings[i].personal_count;
+            const personal_count = aBuildings[i].personal_count;
             wache.textContent += " | Personal: " + personal_count;
             }
         }
